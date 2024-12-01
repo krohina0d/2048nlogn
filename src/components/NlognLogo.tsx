@@ -1,10 +1,12 @@
 import { Box } from '@mui/material';
 
 const NlognLogo = () => {
+  const logoPath = `${import.meta.env.BASE_URL}nlogn-logo.svg`;
+
   return (
     <Box 
       component="img"
-      src="/nlogn-logo.svg"
+      src={logoPath}
       alt="nlogn logo"
       sx={{
         height: { xs: 40, sm: 50 },
