@@ -4,7 +4,7 @@ import Game2048 from './components/Game2048';
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Game2048 />} />
+      <Route path="/2048nlogn" element={<Game2048 />} />
     </Routes>
   );
 };
