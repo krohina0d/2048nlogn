@@ -30,7 +30,11 @@ const ScoreCell = styled(TableCell)`
   color: #1976d2;
 `;
 
-const Leaderboard = () => {
+interface LeaderboardProps {
+  id?: string;
+}
+
+const Leaderboard = ({ id }: LeaderboardProps) => {
   const { highScores, isAdmin, deleteScore, clearAllScores } = useGame();
   console.log('Leaderboard isAdmin:', isAdmin);
 
@@ -47,7 +51,19 @@ const Leaderboard = () => {
   };
 
   return (
-    <Paper sx={{ width: '100%', maxWidth: 600, mt: 2, mb: 2 }}>
+    <Paper 
+      id={id}
+      sx={{ 
+        width: '100%', 
+        maxWidth: 600, 
+        mt: 2, 
+        mb: 2,
+        touchAction: 'pan-y',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        scrollMarginTop: '1rem',
+      }}
+    >
       <Box sx={{ 
         p: 2, 
         borderBottom: 1, 

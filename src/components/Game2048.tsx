@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Fab } from '@mui/material';
 import { useCallback, useEffect, useState, TouchEvent } from 'react';
 import { GameState, Direction, Grid } from '../types/game.types';
 import { styled } from '@mui/material/styles';
@@ -13,13 +13,18 @@ import { useGame } from '../context/GameContext';
 import PlayerNameDialog from './PlayerNameDialog';
 import Leaderboard from './Leaderboard';
 import NlognLogo from './NlognLogo';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 
 const GameContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   padding: theme.spacing(2),
-  touchAction: 'none',
+  paddingBottom: theme.spacing(10),
+  minHeight: '100%',
+  width: '100%',
+  position: 'relative',
+  touchAction: 'pan-y',
 }));
 
 const GridContainer = styled(Box)(({ theme }) => ({
@@ -29,6 +34,9 @@ const GridContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   backgroundColor: '#bbada0',
   borderRadius: theme.spacing(1),
+  touchAction: 'none',
+  maxWidth: '100%',
+  boxSizing: 'border-box',
 }));
 
 const Cell = styled(Box)<{ value: number }>(({ value }) => ({
@@ -167,7 +175,7 @@ const Game2048 = () => {
       return [grid, score, hasMoved];
     };
 
-    // Подготавливаем сетку в зависимости от направления
+    // Подготавливаем сету в зависимости от направления
     let tempGrid = [...newGrid];
     if (direction === 'up') {
       tempGrid = rotate(rotate(rotate(tempGrid)));
@@ -234,6 +242,13 @@ const Game2048 = () => {
     }
   }, [gameState.gameOver, gameState.won, gameState.score, updateHighScores, playerName, scoreSubmitted]);
 
+  const scrollToLeaderboard = () => {
+    const leaderboardElement = document.getElementById('leaderboard');
+    if (leaderboardElement) {
+      leaderboardElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <GameContainer>
       <NlognLogo />
@@ -280,7 +295,20 @@ const Game2048 = () => {
           {gameState.won ? 'You won!' : 'Game Over!'}
         </Typography>
       )}
-      <Leaderboard />
+      <Fab
+        color="primary"
+        size="medium"
+        onClick={scrollToLeaderboard}
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+          zIndex: 1000,
+        }}
+      >
+        <LeaderboardIcon />
+      </Fab>
+      <Leaderboard id="leaderboard" />
       <PlayerNameDialog
         open={showNameDialog}
         onClose={() => setShowNameDialog(false)}
