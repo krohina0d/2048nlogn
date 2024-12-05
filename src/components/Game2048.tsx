@@ -37,6 +37,11 @@ const GridContainer = styled(Box)(({ theme }) => ({
   touchAction: 'none',
   maxWidth: '100%',
   boxSizing: 'border-box',
+  margin: '0 auto',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1),
+    gap: theme.spacing(0.5),
+  }
 }));
 
 const Cell = styled(Box)<{ value: number }>(({ value }) => ({
