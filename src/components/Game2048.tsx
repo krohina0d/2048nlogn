@@ -318,49 +318,6 @@ const Game2048 = () => {
         open={showNameDialog}
         onClose={() => setShowNameDialog(false)}
       />
-      <Box sx={{ 
-        display: { xs: 'grid', md: 'none' },
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 1,
-        mt: 2,
-        width: '240px'
-      }}>
-        <Box />
-        <Button 
-          variant="contained" 
-          onClick={() => moveGrid('up')}
-          sx={{ minWidth: 0, p: 1 }}
-        >
-          ↑
-        </Button>
-        <Box />
-        
-        <Button 
-          variant="contained"
-          onClick={() => moveGrid('left')}
-          sx={{ minWidth: 0, p: 1 }}
-        >
-          ←
-        </Button>
-        <Box />
-        <Button 
-          variant="contained"
-          onClick={() => moveGrid('right')}
-          sx={{ minWidth: 0, p: 1 }}
-        >
-          →
-        </Button>
-        
-        <Box />
-        <Button 
-          variant="contained"
-          onClick={() => moveGrid('down')}
-          sx={{ minWidth: 0, p: 1 }}
-        >
-          ↓
-        </Button>
-        <Box />
-      </Box>
     </GameContainer>
   );
 };
